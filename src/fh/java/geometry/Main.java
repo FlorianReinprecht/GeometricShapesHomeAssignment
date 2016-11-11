@@ -6,6 +6,10 @@ package fh.java.geometry;
 
 
 import fh.java.geometry.model.GeometricShape;
+import fh.java.geometry.model.threedimensional.Cuboid;
+import fh.java.geometry.model.threedimensional.Pyramid;
+import fh.java.geometry.model.threedimensional.Sphere;
+import fh.java.geometry.model.threedimensional.ThreeDimensionalShape;
 import fh.java.geometry.model.twodimensional.Rhombus;
 import fh.java.geometry.model.twodimensional.Trapezium;
 import fh.java.geometry.model.twodimensional.Triangle;
@@ -31,17 +35,36 @@ public class Main {
         printList(shapeList);
 
         List<TwoDimensionalShape> twoDimensionalShapeList = new ArrayList<>();
+        List<ThreeDimensionalShape> threeDimensionalShapeList = new ArrayList<>();
+
         for (GeometricShape shape : shapeList) {
             if (shape instanceof TwoDimensionalShape) {
                 twoDimensionalShapeList.add((TwoDimensionalShape) shape);
+            } else if (shape instanceof ThreeDimensionalShape) {
+                threeDimensionalShapeList.add((ThreeDimensionalShape) shape);
             }
         }
 
+        double sumArea = 0;
+        double sumPerimeter = 0;
         System.out.println("----------twoDimensionalShapes---------------");
         for (TwoDimensionalShape twoDimensionalShape : twoDimensionalShapeList) {
             System.out.println(twoDimensionalShape);
+            sumArea += twoDimensionalShape.calcArea();
+            sumPerimeter +=twoDimensionalShape.calcPerimeter();
         }
+        System.out.println("Total Area: "+ sumArea + ", Total Perimeter: "+ sumPerimeter);
 
+
+        double sumVolume = 0;
+        double sumSurfaceArea = 0;
+        System.out.println("----------threeDimensionalShapes---------------");
+        for (ThreeDimensionalShape threeDimensionalShape : threeDimensionalShapeList) {
+            System.out.println(threeDimensionalShape);
+            sumVolume += threeDimensionalShape.calculateVolume();
+            sumSurfaceArea +=threeDimensionalShape.calculateSurfaceArea();
+        }
+        System.out.println("Total Volume: "+ sumVolume + ", Total Surface Area: "+ sumSurfaceArea);
 
     }
 
@@ -53,8 +76,12 @@ public class Main {
     shapeList.add(new Trapezium(3,4,7.0,5.0,5.0,5.0,15.0));
     shapeList.add(new Triangle(2,2,3.0,4.0,5.0,2.4));
     shapeList.add(new Triangle(2,2,9.0,7.3,10.0,6.3));
-
-
+    shapeList.add(new Cuboid(0,0,5.0,3.0,6.0));
+    shapeList.add(new Cuboid(3,2,8.0,9.0,10.0));
+    shapeList.add(new Pyramid(0,0,2.0,3.0,6.0,4.0,4.0));
+    shapeList.add(new Pyramid(0,0,3.0,4.0,7.0,5.0,5.0));
+    shapeList.add(new Sphere(0,0,10));
+    shapeList.add(new Sphere(4,2,5));
 
     }
 
